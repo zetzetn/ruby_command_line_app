@@ -2,45 +2,63 @@ class Brave
   attr_reader :name, :offense, :defense
   attr_accessor :hp
 
-  # 必殺攻撃の計算に使う定数
   SPECIAL_ATTACK_CONSTANT = 1.5
 
-  def initialize(params)
+  def initialize(**params)
     @name = params[:name]
     @hp = params[:hp]
     @offense = params[:offense]
     @defense = params[:defense]
   end
 
-  # 引数でモンスタークラスのインスタンスを受け取る
   def attack(monster)
     puts "#{@name}の攻撃"
 
-    attack_num = rand(4)
+    attack_type = decision_attack_type
+    damage = calculate_damage(target: monster, attack_type: attack_type)
+    cause_damage(target: monster, damage: damage)
 
-    if attack_num == 0
-      # 必殺攻撃の表示
-      puts "必殺攻撃"
-      # calculate_special_attackの呼び出し
-      # 攻撃力の1.5倍の数値が戻り値として返ってくる
-      damage = calculate_special_attack - monster.defense
-    else
-      # 通常攻撃の表示
-      puts "通常攻撃"
-      damage = @offense - monster.defense
+    puts "#{@name}の残りHPは#{monster.hp}だ"
+  end
+
+  # ここから下のメソッドをprivateメソッドにする
+  private
+
+    def decision_attack_type
+      attack_num = rand(4)
+
+      if attack_num == 0
+        puts "必殺攻撃"
+        "special_attack"
+      else
+        puts "通常攻撃"
+        "normal_attack"
+      end
     end
 
+    def calculate_damage(**params)
+      target = params[:target]
+      attack_type = params[:attack_type]
 
-    # 自己代入：monster.hpからdamageを引いた値をmonster.hpに代入
-    monster.hp -= damage
+      if attack_type == "special_attack"
+        calculate_special_attack - target.defense
+      else
+        @offense - target.defense
+      end
+    end
 
-    puts "#{monster.name}は#{damage}のダメージを受けた"
-    puts "#{monster.name}の残りHPは#{monster.hp}だ"
-  end
+    def cause_damage(**params)
+      damage = params[:damage]
+      target = params[:target]
 
-  def calculate_special_attack
-    @offense * SPECIAL_ATTACK_CONSTANT
-  end
+      target.hp -= damage
+      puts "#{target.name}は#{damage}のダメージを受けた"
+    end
+
+    def calculate_special_attack
+      @offense * SPECIAL_ATTACK_CONSTANT
+    end
+
 end
 
 class Monster
