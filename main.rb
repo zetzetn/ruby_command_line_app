@@ -18,10 +18,9 @@ class Brave
     damage = calculate_damage(target: monster, attack_type: attack_type)
     cause_damage(target: monster, damage: damage)
 
-    puts "#{@name}の残りHPは#{monster.hp}だ"
+    puts "#{monster.name}の残りHPは#{monster.hp}だ"
   end
 
-  # ここから下のメソッドをprivateメソッドにする
   private
 
     def decision_attack_type
@@ -52,6 +51,10 @@ class Brave
       target = params[:target]
 
       target.hp -= damage
+
+      # もしターゲットのHPがマイナスになるなら0を代入
+      target.hp = 0 if target.hp < 0
+
       puts "#{target.name}は#{damage}のダメージを受けた"
     end
 
@@ -62,9 +65,7 @@ class Brave
 end
 
 class Monster
-  # nameを削除
   attr_reader :offense, :defense
-  # nameを追加
   attr_accessor :hp, :name
 
   POWER_UP_RATE = 1.5
@@ -82,22 +83,40 @@ class Monster
 
   def attack(brave)
     if @hp <= @trigger_of_transform && @transform_flag == false
+
       @transform_flag = true
       transform
     end
+
     puts "#{@name}の攻撃"
 
-    damage = @offense - brave.defense
-    brave.hp -= damage
+    damage = calculate_damage(brave)
+    cause_damage(target: brave, damage: damage)
 
-    puts "#{brave.name}は#{damage}のダメージを受けた"
     puts "#{brave.name}の残りHPは#{brave.hp}だ"
   end
 
   private
 
+    def calculate_damage(target)
+      @offense - target.defense
+    end
+
+    def cause_damage(**params)
+      damage = params[:damage]
+      target = params[:target]
+
+      target.hp -= damage
+
+      # もしターゲットのHPがマイナスになるなら0を代入
+      target.hp = 0 if target.hp < 0
+
+      puts "#{target.name}は#{damage}のダメージを受けた"
+    end
+
     def transform
       transform_name = "ドラゴン"
+
       puts <<~EOS
       #{@name}は怒っている
       #{@name}は#{transform_name}に変身した
@@ -112,23 +131,10 @@ end
 brave = Brave.new(name: "テリー", hp: 500, offense: 150, defense: 100)
 monster = Monster.new(name: "スライム", hp: 250, offense: 200, defense: 100)
 
-# attackメソッドの呼び出し
-brave.attack(monster)
-# 以下を削除
-# puts <<~TEXT
-#
-# HP：#{brave.hp}
-# ATTACK：#{brave.attack}
-# DEFENSE：#{brave.defense}
-#
-# TEXT
+loop do
+  brave.attack(monster)
+  break if monster.hp <= 0
 
-# 以下を削除
-# puts <<~TEXT
-#
-# Monster
-# HP：#{monster.hp}
-# OFFENSE：#{monster.offense}
-# DEFENSE：#{monster.defense}
-#
-# TEXT
+  monster.attack(brave)
+  break if brave.hp <= 0
+end
