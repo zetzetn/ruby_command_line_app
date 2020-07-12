@@ -11,22 +11,18 @@ class Brave < Character
 
     # attack_typeを引数に渡す
     attack_message(attack_type: attack_type)
-
-    # puts "#{monster.name}の残りHPは#{monster.hp}だ"
-        # damage_messageを呼び出す
     damage_message(target: monster, damage: damage)
   end
 
   private
-
     def decision_attack_type
       attack_num = rand(4)
 
       if attack_num == 0
-        # puts "必殺攻撃"
+        # "必殺攻撃"
         "special_attack"
       else
-        # puts "通常攻撃"
+        # "通常攻撃"
         "normal_attack"
       end
     end
@@ -48,8 +44,6 @@ class Brave < Character
 
       target.hp -= damage
       target.hp = 0 if target.hp < 0
-
-      puts "#{target.name}は#{damage}のダメージを受けた"
     end
 
     def calculate_special_attack

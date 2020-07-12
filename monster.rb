@@ -53,7 +53,6 @@ class Monster < Character
       # transform_messageを呼び出し
       transform_message(origin_name: @name, transform_name: transform_name)
 
-
       @offense *= POWER_UP_RATE
       @name = transform_name
     end
