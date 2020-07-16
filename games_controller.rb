@@ -11,7 +11,16 @@ class GamesController
   def battle(**params)
     build_characters(params)
 
+    # 戦闘開始
     loop do
+
+    # コマンドメッセージ、コマンド追加  
+    puts <<~EOS
+    コマンド？
+    1：攻撃 2：防御　3：にげる
+    
+    EOS
+
       @brave.attack(@monster)
       break if battle_end?
       @monster.attack(@brave)
