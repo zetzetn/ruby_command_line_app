@@ -34,8 +34,11 @@ class GamesController
         break if battle_end?
     
       elsif command_num==2 # 防御
+        deffence_message
+        @monster.attack(@brave)  # 仮攻撃
+        break if battle_end?
 
-
+      elsif command_num==3 # 逃げる
 
       else
         puts "コマンドを入力して下さい"

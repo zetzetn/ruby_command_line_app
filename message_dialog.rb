@@ -18,6 +18,15 @@ module MessageDialog
     EOS
   end
 
+#  # deffence_messageを実装
+#   def deffence_message(**params)
+#     target = params[:target]
+#     puts <<~EOS
+#     #{target.name}は身の守りを固めた
+
+#     EOS
+#   end
+
   # end_messageを実装
   def end_message(result)
     if result[:brave_win_flag]
