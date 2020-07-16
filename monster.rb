@@ -30,6 +30,13 @@ class Monster < Character
     attack_message(target: brave)
     # damage_messageを呼び出す
     damage_message(target: brave, damage: damage)
+
+    # 〜を追加
+    puts <<~EOS
+
+    〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜
+
+    EOS
   end
 
   private
