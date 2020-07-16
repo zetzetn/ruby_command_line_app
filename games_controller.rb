@@ -17,16 +17,32 @@ class GamesController
     # コマンドメッセージ、コマンド追加  
     puts <<~EOS
     コマンド？
-    1：攻撃 2：防御　3：にげる
-    
+    1：攻撃 2：防御　3：逃げる
+
     EOS
 
-      @brave.attack(@monster)
-      break if battle_end?
-      @monster.attack(@brave)
-      break if battle_end?
-    end
+    # コマンド入力 数値でコンソールから入力を受け取る
+    command_num = gets.chomp.to_i
 
+
+    # 条件分岐追加  
+       
+      if command_num==1 # 攻撃
+        @brave.attack(@monster)
+        break if battle_end?
+        @monster.attack(@brave)
+        break if battle_end?
+    
+      elsif command_num==2 # 防御
+
+
+
+      else
+        puts "コマンドを入力して下さい"
+        puts ""
+      end
+
+    end
     battle_judgment
   end
 
