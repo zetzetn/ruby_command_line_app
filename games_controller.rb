@@ -33,8 +33,10 @@ class GamesController
         @monster.attack(@brave)
         break if battle_end?
     
+
       elsif command_num==2 # 防御
-        deffence_message
+
+        #テリーの防御力向上＋会心の一撃2倍
         @monster.attack(@brave)  # 仮攻撃
         break if battle_end?
 
