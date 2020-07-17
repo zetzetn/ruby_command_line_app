@@ -3,6 +3,7 @@ require './character'
 class Monster < Character
 
   POWER_UP_RATE = 1.5
+  DEFFENCE_UP_RATE = 2.5
   CALC_HALF_HP = 0.5
 
   def initialize(**params)
@@ -39,10 +40,35 @@ class Monster < Character
     EOS
   end
 
+    # brave防御
+  def deffence(brave)
+
+
+    damage = calculate_deffence_damage(brave)
+    cause_damage(target: brave, damage: damage)
+
+    # attack_messageの呼び出し
+    attack_message(target: brave)
+    # damage_messageを呼び出す
+    deffence_message(target: brave, damage: damage)
+
+    # 〜を追加
+    puts <<~EOS
+
+    〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜
+
+    EOS
+  end
+
   private
 
     def calculate_damage(target)
       @offense - target.defense
+    end
+
+    def calculate_deffence_damage(target)
+      # @offense - target.defense * DEFFENCE_UP_RATE
+      return 0
     end
 
     def cause_damage(**params)

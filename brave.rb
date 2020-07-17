@@ -4,6 +4,7 @@ class Brave < Character
 
   SPECIAL_ATTACK_CONSTANT = 1.5
 
+  # 攻撃コマンド
   def attack(monster)
     attack_type = decision_attack_type
     damage = calculate_damage(target: monster, attack_type: attack_type)
