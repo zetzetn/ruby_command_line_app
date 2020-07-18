@@ -1,4 +1,6 @@
 module MessageDialog
+
+
   def attack_message(**params)
     attack_type = params[:attack_type]
 
