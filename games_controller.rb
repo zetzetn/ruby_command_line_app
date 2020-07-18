@@ -47,7 +47,8 @@ class GamesController
         break if battle_end?
 
       elsif command_num==3 # 逃げる
-        rub_away_message()
+        run_away_message(params)
+
         run_away_end
 
       else

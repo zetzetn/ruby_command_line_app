@@ -46,14 +46,17 @@ module MessageDialog
   end
 
    # にげるメッセージ
-   def rub_away_message(**params)
+   def run_away_message(brave:,monster:)
     # target = params[:target]
     # damage = params[:damage]
+    # 逃げ出した
 
-    # puts <<~EOS
-    # #{name}は逃げ出した
+    # @brave = params[:brave]
+
     puts <<~EOS
-    逃げ出した
+    #{brave.name}は逃げ出した
+ 
+
     EOS
   end
 
