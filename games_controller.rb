@@ -11,6 +11,12 @@ class GamesController
   def battle(**params)
     build_characters(params)
 
+    # 初期値を表示
+    # initial_message(params)
+    puts ""
+    puts "初期値を表示"
+    puts ""
+
     # 戦闘開始
     loop do
 
@@ -25,7 +31,7 @@ class GamesController
     command_num = gets.chomp.to_i
 
 
-    # 条件分岐追加  
+    # 条件分岐
        
       if command_num==1 # 攻撃
         @brave.attack(@monster)
@@ -35,12 +41,14 @@ class GamesController
     
       elsif command_num==2 # 防御
 
-        #テリーの防御力向上＋会心の一撃2倍
+        #会心の一撃2倍に改修予定
 
-        @monster.deffence(@brave)  # 仮攻撃
+        @monster.deffence(@brave)
         break if battle_end?
 
       elsif command_num==3 # 逃げる
+        rub_away_message()
+        run_away_end
 
       else
         puts "コマンドを入力して下さい"
@@ -69,7 +77,6 @@ class GamesController
     def battle_judgment
       result = calculate_of_exp_and_gold
 
-      # end_messageを呼び出す
       end_message(result)
     end
 
@@ -86,4 +93,10 @@ class GamesController
 
       {brave_win_flag: brave_win_flag, exp: exp, gold: gold}
     end
+
+    # 逃げるメソッド
+    def run_away_end
+      exit
+    end
+
 end

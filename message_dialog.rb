@@ -1,5 +1,16 @@
 module MessageDialog
 
+  #  # 初期ステータスと現れた敵の表示
+  # def initial_message(**params)
+  #??@brave = params[:brave]
+  #   target = params[:target]
+
+  #   puts "#{target.name}"
+  #   # puts terry
+  #   # @brave.show
+  #   # @monster.show
+
+  # end
 
   def attack_message(**params)
     attack_type = params[:attack_type]
@@ -21,21 +32,32 @@ module MessageDialog
     EOS
   end
 
- # 防御時のメッセージ
+ # 防御メッセージ
   def deffence_message(**params)
     target = params[:target]
-    damage = params[:damage]
+
 
     puts <<~EOS
+
     #{target.name}は身の守りを固めた
 
-    #{target.name}は#{damage}のダメージを受けた
-    #{target.name}の残りHPは#{target.hp}だ
-
+    #{target.name}はダメージを受けない
     EOS
   end
 
-  # end_messageを実装
+   # にげるメッセージ
+   def rub_away_message(**params)
+    # target = params[:target]
+    # damage = params[:damage]
+
+    # puts <<~EOS
+    # #{name}は逃げ出した
+    puts <<~EOS
+    逃げ出した
+    EOS
+  end
+
+  # 戦闘終了時のメッセージ
   def end_message(result)
     if result[:brave_win_flag]
       puts <<~EOS
@@ -54,7 +76,7 @@ module MessageDialog
     end
   end
 
-    # transform_messageを実装
+    # 変身時のメッセージ
   def transform_message(**params)
     origin_name = params[:origin_name]
     transform_name = params[:transform_name]
