@@ -1,6 +1,7 @@
 require './brave'
 require './monster'
 require './games_controller'
+require './output_color'   # 標準出力の文字に色をつける
 
 games_controller = GamesController.new
 
