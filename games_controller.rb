@@ -35,6 +35,17 @@ class GamesController
         break if battle_end?
  
       elsif command_num==2 # 道具
+        item_message(params)
+        # コマンド入力 数値でコンソールから入力を受け取る
+          item_num = gets.chomp.to_i
+            if item_num==11 # 薬草
+            
+            elsif item_num==12 # 魔道士の杖
+            
+            else
+              puts "コマンドを入力して下さい"
+              puts ""
+            end
 
       elsif command_num==3 # 防御
 

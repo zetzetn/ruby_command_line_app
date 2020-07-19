@@ -10,6 +10,8 @@ module MessageDialog
     HP:#{brave.hp}
     OFFENSE:#{brave.offense}
     DEFENSE:#{brave.defense}
+    ITEM1:#{brave.item1}
+    ITEM2:#{brave.item2}
     ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
     EOS
     TermColor.reset
@@ -39,6 +41,17 @@ module MessageDialog
 
     #{target.name}は#{damage}のダメージを受けた
     #{target.name}の残りHPは#{target.hp}だ
+
+    EOS
+  end
+
+   # 道具メッセージ
+   def item_message(brave:,monster:)
+
+    puts <<~EOS
+    アイテム？
+    　11:#{brave.item1}
+    　12:#{brave.item2}
 
     EOS
   end
