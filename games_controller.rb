@@ -20,7 +20,7 @@ class GamesController
     # コマンドメッセージ、コマンド追加  
     puts <<~EOS
     コマンド？
-    1：攻撃 2：防御　3：逃げる
+    1：攻撃 2：道具　3：防御　4：逃げる
 
     EOS
 
@@ -33,14 +33,16 @@ class GamesController
         break if battle_end?
         @monster.attack(@brave)
         break if battle_end?
-    
-      elsif command_num==2 # 防御
+ 
+      elsif command_num==2 # 道具
+
+      elsif command_num==3 # 防御
 
         #会心の一撃2倍に改修予定
         @monster.deffence(@brave)
         break if battle_end?
 
-      elsif command_num==3 # 逃げる
+      elsif command_num==4 # 逃げる
         run_away_message(params)
         run_away_end
 
