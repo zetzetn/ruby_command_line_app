@@ -40,8 +40,15 @@ class GamesController
           item_num = gets.chomp.to_i
             if item_num==11 # 薬草
             
+              # ゆうしゃ　回復メソッド　
+              @monster.attack(@brave)
+              break if battle_end?
+
             elsif item_num==12 # 魔道士の杖
-            
+
+                # ゆうしゃ　道具ダメージメソッド
+              @monster.attack(@brave)
+              break if battle_end?
             else
               puts "コマンドを入力して下さい"
               puts ""
