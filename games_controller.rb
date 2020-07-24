@@ -41,6 +41,9 @@ class GamesController
             if item_num==11 # 薬草
             
               # ゆうしゃ　回復メソッド　
+              @brave.use_healing_item(@brave)
+              break if battle_end?
+
               @monster.attack(@brave)
               break if battle_end?
 

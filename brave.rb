@@ -16,6 +16,15 @@ class Brave < Character
     damage_message(target: monster, damage: damage)
   end
 
+    # 回復アイテム使用
+    def use_healing_item(brave)
+      attack_type = "use_healing_item" #攻撃タイプを選択
+      damage = calculate_item_healing(target: brave, attack_type: attack_type)
+      cause_damage(target: brave, damage: damage)
+      item_using_message(attack_type: attack_type)
+
+  end
+
     # アイテム攻撃
   def item_attack(monster)
       attack_type = "item_attack" #攻撃タイプを選択
@@ -49,6 +58,18 @@ class Brave < Character
       else
         @offense - target.defense
       end
+    end
+
+    def calculate_item_healing(**params)
+      target = params[:target]
+      attack_type = params[:attack_type]
+
+      return -(250)
+      # if attack_type == "use_healing_item"
+      #   @hp+300
+      # else
+      #   @hp+300
+      # end
     end
 
     def calculate_item_damage(**params)
