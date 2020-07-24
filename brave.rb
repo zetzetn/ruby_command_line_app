@@ -3,6 +3,7 @@ require './character'
 class Brave < Character
 
   SPECIAL_ATTACK_CONSTANT = 1.5
+  ITEM_ATTACK_CONSTANT = 3.0
 
   # 攻撃コマンド
   def attack(monster)
@@ -13,6 +14,17 @@ class Brave < Character
     # attack_typeを引数に渡す
     attack_message(attack_type: attack_type)
     damage_message(target: monster, damage: damage)
+  end
+
+    # アイテム攻撃
+  def item_attack(monster)
+      attack_type = "item_attack" #攻撃タイプを選択
+      damage = calculate_item_damage(target: monster, attack_type: attack_type)
+      cause_damage(target: monster, damage: damage)
+  
+      # attack_typeを引数に渡す
+      item_attack_message(attack_type: attack_type)
+      damage_message(target: monster, damage: damage)
   end
 
   private
@@ -39,6 +51,17 @@ class Brave < Character
       end
     end
 
+    def calculate_item_damage(**params)
+      target = params[:target]
+      attack_type = params[:attack_type]
+
+      if attack_type == "item_attack"
+        calculate_item_attack - target.defense
+      else
+        @offense - target.defense
+      end
+    end
+
     def cause_damage(**params)
       damage = params[:damage]
       target = params[:target]
@@ -49,5 +72,10 @@ class Brave < Character
 
     def calculate_special_attack
       @offense * SPECIAL_ATTACK_CONSTANT
+    end
+
+    # アイテム攻撃計算
+    def calculate_item_attack
+      @offense * ITEM_ATTACK_CONSTANT
     end
 end

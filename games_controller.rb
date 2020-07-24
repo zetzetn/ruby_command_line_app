@@ -47,6 +47,8 @@ class GamesController
             elsif item_num==12 # 魔道士の杖
 
                 # ゆうしゃ　道具ダメージメソッド
+              @brave.item_attack(@monster)
+              break if battle_end?
               @monster.attack(@brave)
               break if battle_end?
             else

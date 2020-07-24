@@ -33,6 +33,15 @@ module MessageDialog
     TermColor.reset
   end
 
+  def item_attack_message(**params)
+    attack_type = params[:attack_type]
+
+    TermColor.yellow
+    puts "#{@name}は#{@item2}を使った"
+    puts ""
+    TermColor.reset
+  end
+
   def damage_message(**params)
     target = params[:target]
     damage = params[:damage]
